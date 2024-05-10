@@ -133,7 +133,7 @@ public class PlayerHealth : MonoBehaviour
     IEnumerator UpdateHealthBar()
     {
         float elapsedTime = 0f;
-        float duration = 0.5f;
+        float duration = 0.1f;
 
         while (elapsedTime < duration)
         {
@@ -151,20 +151,44 @@ public class PlayerHealth : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
-        if ((collision.gameObject.CompareTag("Spikes")) || (collision.gameObject.CompareTag("SpikeMan")) || (collision.gameObject.CompareTag("Bottom")) || collision.gameObject.CompareTag("Enemy"))
+        if (((collision.gameObject.CompareTag("SpikeMan")) || (collision.gameObject.CompareTag("Bottom")) ))
         {
-            state = MovementState.hurt;
+            animator.SetTrigger("Hit");
             /*            animator.SetTrigger("Attack");
             */
 
 
-            TakeDamage(10f);
+            TakeDamage(15f);
 
         }
+        else if (collision.gameObject.CompareTag("Spikes")) 
+        {
+/*            state = MovementState.hurt;
+*/            animator.SetTrigger("Hit");
+
+
+
+            TakeDamage(5f);
+        }
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            animator.SetTrigger("Hit");
+
+            /*            animator.SetTrigger("Attack");
+            */
+
+
+            TakeDamage(5f);
+        }
+        else { 
+        }
     }
+
     private void Die()
     {
-        anim.SetTrigger("death");
+/*        anim.SetTrigger("death");
+*/        animator.SetBool("death", true);
+
         rb.bodyType = RigidbodyType2D.Static;
     }
 }
