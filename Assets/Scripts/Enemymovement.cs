@@ -26,7 +26,9 @@ public class Enemymovement : MonoBehaviour
     private Animator anim;
     private bool levelCompleted;
     private AudioSource finishSound;
-
+    private bool isWaiting = false;
+    private float waitTime = 3f;
+    private float timer = 0f;
 
 
     [SerializeField] private GameObject[] waypoints;
@@ -69,6 +71,11 @@ public class Enemymovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!isWaiting)
+        {
+            isWaiting = true;
+            StartCoroutine(WaitForSecondsInVoid());
+        }
         waypointTransform = waypoints[currentWaypointIndex].transform;
         if (Vector2.Distance(waypointTransform.position, transform.position) < .1f)
         {
@@ -83,29 +90,28 @@ public class Enemymovement : MonoBehaviour
 
 
             }
-            //Debug.Log($"enemy count {enemyCount}, points {itemcollector.points} levelcomp {levelCompleted}");
-           /* if (enemyCount == 0 && itemcollector.points ==0 && levelCompleted != true)
-            {
-                anim.SetTrigger("finished");
-                finishSound.Play();
-                levelCompleted = true;
-                Invoke("CompleteLevel", 6f);
-                Debug.Log("finish");
-
-
-
-
-
-
-            }*/
-
+      
         }
 
 
-     
+
+        IEnumerator WaitForSecondsInVoid()
+        {
+            Debug.Log("Start waiting");
+
+            while (timer < waitTime)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+
+            Debug.Log("Finished waiting");
+
+            // Här kan du utföra din åtgärd efter att ha väntat i 3 sekunder
+        }
 
 
-   
+
 
         transform.position = Vector2.MoveTowards(transform.position, waypointTransform.position, Time.deltaTime * speed);
 
@@ -125,8 +131,7 @@ public class Enemymovement : MonoBehaviour
            
         }
     }
-  
-
+   
     void Die()
     {
         player.GetComponent<Finishedlevel>().enemyCount--;
@@ -138,9 +143,10 @@ public class Enemymovement : MonoBehaviour
         enemyCount -= 1;
         Enemytext.text = "Enemies remaining: " + enemyCount;
 
+        Destroy(gameObject);
 
     }
-   
+
     private bool isGrounded()
     {
         return Physics2D.BoxCast(boxCol.bounds.center, boxCol.bounds.size, 0f, Vector2.down, 1f, jumpableGround);

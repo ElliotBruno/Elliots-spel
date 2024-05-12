@@ -46,8 +46,7 @@ public class Playercombat : MonoBehaviour
         anim = GetComponent<Animator>();
 
     }
-/*    anim.SetBool("ground", isGrounded());
-*/
+
     private bool isGrounded()
     {
         RaycastHit2D raycastHit = Physics2D.BoxCast(boxCol.bounds.center, boxCol.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
@@ -72,7 +71,6 @@ public class Playercombat : MonoBehaviour
             rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
         }
 
-        //rb.AddForce(new Vector2(0, 1f) * JumpForce * Time.deltaTime);
     }
     void Update()
     { 
