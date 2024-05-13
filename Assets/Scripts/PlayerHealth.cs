@@ -77,7 +77,7 @@ public class PlayerHealth : MonoBehaviour
             animator.SetTrigger("Hit");
        
 
-            TakeDamage(15f);
+            TakeDamage(55f);
 
         }
         else if (collision.gameObject.CompareTag("Spikes"))
@@ -87,7 +87,7 @@ public class PlayerHealth : MonoBehaviour
 
 
 
-            TakeDamage(0f);
+            TakeDamage(70f);
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
@@ -96,8 +96,18 @@ public class PlayerHealth : MonoBehaviour
     
 
 
-            TakeDamage(5f);
+            TakeDamage(40f);
         }
+        else if (collision.gameObject.CompareTag("Lava"))
+        {
+            animator.SetTrigger("Hit");
+
+
+
+
+            TakeDamage(101f);
+        }
+
         else
         {
         }

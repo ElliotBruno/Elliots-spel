@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 173620809}
   - component: {fileID: 173620808}
   - component: {fileID: 173620807}
-  - component: {fileID: 173620810}
+  - component: {fileID: 173620811}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -341,7 +341,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 173620810}
+      - m_Target: {fileID: 173620811}
         m_TargetAssemblyTypeName: StartGame, Assembly-CSharp
         m_MethodName: StartButton
         m_Mode: 1
@@ -391,7 +391,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173620805}
   m_CullTransparentMesh: 1
---- !u!114 &173620810
+--- !u!114 &173620811
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 173620805}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c428f9a825420d4f9e12fa4c7720eb9, type: 3}
+  m_Script: {fileID: 11500000, guid: a3c38b2971de65545a6d562c65afee17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &637375221
@@ -415,6 +415,7 @@ GameObject:
   - component: {fileID: 637375224}
   - component: {fileID: 637375223}
   - component: {fileID: 637375222}
+  - component: {fileID: 637375226}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -508,6 +509,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &637375226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637375221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3c38b2971de65545a6d562c65afee17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &740674242
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +578,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Controls: \nHeavyattack:R \nAttack:T\nJump:Space"
+  m_text: "Controls: \nHeavyattack:R \nAttack:T\nJump:Space\n\nPS:May Contain fake
+    fruits"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

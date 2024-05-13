@@ -1,10 +1,4 @@
-
-
-
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+using System;
 using UnityEngine;
 
 public class Playermovement : MonoBehaviour
@@ -33,6 +27,7 @@ public class Playermovement : MonoBehaviour
     private float dashingPower = 24f;
     private float dashTime = 0.2f;
     private KeyCode rollKey = KeyCode.V;
+    private bool isVisible = false;
 
 
     private enum MovementState { idle, running, jumping, falling, double_jumping, wall_jummping, hurt, Roll }
@@ -75,6 +70,7 @@ public class Playermovement : MonoBehaviour
         }
         else if (Wall() && !isGrounded())
         {
+            Debug.Log("Hej");
             if (horizontal == 0)
             {
                 rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
@@ -82,10 +78,11 @@ public class Playermovement : MonoBehaviour
 
             }
             else
+            {
                 wallJumpCooldown = 0;
-            rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
+                rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 3, 6);
+            }
         }
-
     }
 
     private void DoubleJump()
@@ -112,6 +109,9 @@ public class Playermovement : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         activespeed = moveSpeed;
         Invoke("SpawnDelay", 1);
+        sprite.enabled = false;
+
+        Invoke("ContinueExecution", 2f);
 
     }
 
@@ -123,6 +123,7 @@ public class Playermovement : MonoBehaviour
         if (dirX > -1f)
         {
             anim.SetTrigger("Roll");
+            Invoke("ContinueExecution", 2f);
 
             transform.position = transform.position + new Vector3(10, 0, 0);
             sprite.flipX = false;
@@ -132,6 +133,7 @@ public class Playermovement : MonoBehaviour
         if (dirX > 0f)
         {
             anim.SetTrigger("Roll");
+            Invoke("ContinueExecution", 2f);
 
             transform.position = transform.position + new Vector3(10, 0, 0);
             sprite.flipX = false;
@@ -140,6 +142,8 @@ public class Playermovement : MonoBehaviour
         }
         else if (dirX < 0)
         {
+            Invoke("ContinueExecution", 2f);
+
             sprite.flipX = true;
             transform.position = transform.position + new Vector3(-10, 0, 0);
 
@@ -154,6 +158,10 @@ public class Playermovement : MonoBehaviour
 
     }
 
+    void ContinueExecution()
+    {
+        Debug.Log("Waited for 2 seconds. Continue execution.");
+    }
     // Update is called once per frame
 
     void Update()
@@ -171,8 +179,8 @@ public class Playermovement : MonoBehaviour
 
 
 
-        anim.SetBool("Run", horizontal != 0);
-        anim.SetBool("ground", isGrounded());
+    /*    anim.SetBool("Run", horizontal != 0);
+        anim.SetBool("ground", isGrounded());*/
 
         if (Input.GetKeyDown(rollKey))
         {
@@ -299,7 +307,6 @@ public class Playermovement : MonoBehaviour
         if (((collision.gameObject.CompareTag("Wall")) ))
         {
             Wall();
-            sprite.flipX = false;
 
             state = MovementState.wall_jummping;
 
@@ -316,8 +323,16 @@ public class Playermovement : MonoBehaviour
     }
     private bool Wall()
     {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCol.bounds.center, boxCol.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
-        return raycastHit.collider != null;
+        RaycastHit2D raycastHitRight = Physics2D.BoxCast(boxCol.bounds.center, boxCol.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
+        RaycastHit2D raycastHitLeft = Physics2D.BoxCast(boxCol.bounds.center, boxCol.bounds.size, 0, new Vector2(transform.localScale.x, 0), -0.1f, wallLayer);
+        if(raycastHitLeft.collider != null ||  raycastHitRight.collider != null) { return true; }
+        else
+        {
+            return false;
+        }
+        //return raycastHit.collider != null;
+
+
     }
 
 }

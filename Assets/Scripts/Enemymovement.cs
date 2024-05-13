@@ -29,6 +29,7 @@ public class Enemymovement : MonoBehaviour
     private bool isWaiting = false;
     private float waitTime = 3f;
     private float timer = 0f;
+    private BoxCollider2D boxCollider;
 
 
     [SerializeField] private GameObject[] waypoints;
@@ -64,6 +65,8 @@ public class Enemymovement : MonoBehaviour
         sprite.flipX = true;
         HP = MaxHP;
         itemcollector = player.GetComponent<itemcollector>();
+
+        boxCollider = GetComponent<BoxCollider2D>();
 
 
     }
@@ -142,36 +145,20 @@ public class Enemymovement : MonoBehaviour
         this.enabled = false;
         enemyCount -= 1;
         Enemytext.text = "Enemies remaining: " + enemyCount;
+        Invoke("DestroyEnemy",2f);
 
-        Destroy(gameObject);
-
+     
     }
 
     private bool isGrounded()
     {
         return Physics2D.BoxCast(boxCol.bounds.center, boxCol.bounds.size, 0f, Vector2.down, 1f, jumpableGround);
     }
+    void DestroyEnemy()
+    {
+        Destroy(gameObject);
+    }
 }
 
-
-
-
-/*  void Damage(float damage)
-     {
-         Debug.Log("tar skada :)");
-         HP -= damage;
-         if (HP <= 0)
-         {
-             Destroy(sprite.gameObject);
-             points += 1;
-
-             Enemycount.text = "Enemies Remaining: " + points;
-
-             enemycount++;
-         }
-
-
-
-     }*/
 
 

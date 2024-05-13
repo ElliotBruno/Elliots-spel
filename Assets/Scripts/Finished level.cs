@@ -57,6 +57,20 @@ void Start()
 
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        if (((collision.gameObject.CompareTag("Finish")) ))
+        {
+            anim.SetTrigger("finished");
+            finishSound.Play();
+            levelCompleted = true;
+            Invoke("CompleteLevel", 1f);
+            Debug.Log("finish");
+
+        }
+    }
     void CompleteLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
