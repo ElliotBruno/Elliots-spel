@@ -125,7 +125,9 @@ public class Playermovement : MonoBehaviour
             anim.SetTrigger("Roll");
             Invoke("ContinueExecution", 2f);
 
-            transform.position = transform.position + new Vector3(10, 0, 0);
+            transform.position = transform.position + new Vector3(5, 0, 0);
+            Invoke("SpawnDelay", 0.1f);
+
             sprite.flipX = false;
         }
 
@@ -135,7 +137,9 @@ public class Playermovement : MonoBehaviour
             anim.SetTrigger("Roll");
             Invoke("ContinueExecution", 2f);
 
-            transform.position = transform.position + new Vector3(10, 0, 0);
+            transform.position = transform.position + new Vector3(5, 0, 0);
+            Invoke("SpawnDelay", 1);
+
             sprite.flipX = false;
 
 

@@ -13,7 +13,7 @@ public class Enemymovement : MonoBehaviour
     itemcollector itemcollector;
 
 
-    public int enemyCount = 2;
+    public int enemyCount = 1;
 
     [SerializeField] private TextMeshProUGUI Enemytext;
 
@@ -43,17 +43,18 @@ public class Enemymovement : MonoBehaviour
     public int MaxHP = 300;
     int HP = 300;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+ 
+    private void OnCollisionEnter2D(Collision2D collision)
     {
 
-
-        if (collision.gameObject.CompareTag("Player"))
+        if (((collision.gameObject.CompareTag("Player"))))
         {
             animator.SetTrigger("Attack");
 
+
+
+
         }
-
-
     }
 
     void Start()
@@ -135,7 +136,7 @@ public class Enemymovement : MonoBehaviour
         }
     }
    
-    void Die()
+    private void Die()
     {
         player.GetComponent<Finishedlevel>().enemyCount--;
        

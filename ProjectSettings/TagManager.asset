@@ -11,6 +11,10 @@ TagManager:
   - Enemy
   - Wall
   - Lava
+  - Fake
+  - Flie
+  - Fire
+  - Propeller
   layers:
   - Default
   - TransparentFX

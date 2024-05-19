@@ -72,7 +72,7 @@ public class PlayerHealth : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (((collision.gameObject.CompareTag("SpikeMan")) || (collision.gameObject.CompareTag("Bottom"))))
+        if (((collision.gameObject.CompareTag("Flie"))))
         {
             animator.SetTrigger("Hit");
        
@@ -105,7 +105,25 @@ public class PlayerHealth : MonoBehaviour
 
 
 
-            TakeDamage(101f);
+            TakeDamage(200f);
+        }
+        else if (collision.gameObject.CompareTag("Fire"))
+        {
+            animator.SetTrigger("Hit");
+
+
+
+
+            TakeDamage(200f);
+        }
+        else if (collision.gameObject.CompareTag("Propeller"))
+        {
+            animator.SetTrigger("Hit");
+
+
+
+
+            TakeDamage(20f);
         }
 
         else
@@ -118,7 +136,9 @@ public class PlayerHealth : MonoBehaviour
       
         animator.SetBool("death", true);
 
-        rb.bodyType = RigidbodyType2D.Static;
+                rb.bodyType = RigidbodyType2D.Static;
+                
+       
     }
 }
 

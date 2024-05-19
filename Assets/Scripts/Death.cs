@@ -24,7 +24,7 @@ public class Death : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if ((collision.gameObject.CompareTag("Spikes")) || (collision.gameObject.CompareTag("SpikeMan")) || (collision.gameObject.CompareTag("Bottom")) || collision.gameObject.CompareTag("Enemy"))
+        if ((collision.gameObject.CompareTag("Spikes")) || (collision.gameObject.CompareTag("Flie")) || collision.gameObject.CompareTag("Enemy"))
         {
             Die();
 
@@ -34,10 +34,11 @@ public class Death : MonoBehaviour
     
     private void Die()
     {
-        if (healthAmount<0)
+        if (healthAmount<=0)
         {
-            deathSoundEffect.Play();
             anim.SetTrigger("death");
+
+            deathSoundEffect.Play();
             rb.bodyType = RigidbodyType2D.Static;
         }
         
