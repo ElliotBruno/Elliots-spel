@@ -13,7 +13,7 @@ public class Playermovement : MonoBehaviour
     private float horizontal;
 
     private BoxCollider2D boxCol;
-  
+
 
     private SpriteRenderer sprite;
     private bool canDash = true;
@@ -30,7 +30,7 @@ public class Playermovement : MonoBehaviour
     private bool isVisible = false;
 
 
-    private enum MovementState { idle, running, jumping, falling, double_jumping, wall_jummping, hurt, Roll }
+    private enum MovementState { idle, running, jumping, falling, double_jumping, wall_jumping, hurt, Roll }
 
     private MovementState state = MovementState.idle;
 
@@ -42,17 +42,17 @@ public class Playermovement : MonoBehaviour
     [SerializeField] private LayerMask wallLayer;
     [SerializeField] private Transform wallcheck;
 
-    
+
     private float wallslidespeed = 2f;
     private bool walljumping;
     private float wallJumpCooldown;
 
     private float walljumpdirection;
-        private float walljumptime=0.2f;
-    
+    private float walljumptime = 20.2f;
+
     private float walljumpcounter;
     private float walljumpduration = 1f;
-    private Vector2 walljumppower = new Vector2(8f, 16f);
+    private Vector2 walljumppower = new Vector2(20f, 20f);
 
 
 
@@ -102,7 +102,7 @@ public class Playermovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         boxCol = GetComponent<BoxCollider2D>();
-      
+
 
         anim = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
@@ -182,8 +182,6 @@ public class Playermovement : MonoBehaviour
 
 
 
-    /*    anim.SetBool("Run", horizontal != 0);
-        anim.SetBool("ground", isGrounded());*/
 
         if (Input.GetKeyDown(rollKey))
         {
@@ -210,7 +208,7 @@ public class Playermovement : MonoBehaviour
         {
             dashcoolcounter -= Time.deltaTime;
         }
-        
+
         dirX = Input.GetAxisRaw("Horizontal");
         UpdateAnimationState();
 
@@ -237,23 +235,57 @@ public class Playermovement : MonoBehaviour
         {
             ExtraJumps = MaxJumps;
         }
-        if (wallJumpCooldown < 0.1f)
+
+
+        if (Input.GetButtonDown("Jump") && isGrounded())
         {
+            Jump();
+            anim.SetBool("grounded", isGrounded());
+        }
+        else if (Input.GetButtonDown("Jump") && ExtraJumps > 0)
+        {
+            ExtraJumps--;
+            DoubleJump();
+        }
 
-            rb.velocity = new Vector2(horizontal * moveSpeed, rb.velocity.y);
+      
 
+
+
+
+
+        if (wallJumpCooldown > 0.2f)
+        {
+            rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
             if (Wall() && !isGrounded())
             {
                 rb.gravityScale = 0;
-                rb.velocity = Vector2.zero;
+                rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallslidespeed, float.MaxValue));
             }
             else
+            {
                 rb.gravityScale = 3;
-            if (Input.GetKey(KeyCode.Space))
+            }
 
-                Jump();
+            if (Input.GetButtonDown("Jump") && Wall())
+            {
+                wallJumpCooldown = 0;
+                walljumping = true;
+                rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * walljumppower.x, walljumppower.y);
+                sprite.flipX = !sprite.flipX;
+            }
         }
-        else wallJumpCooldown += Time.deltaTime;
+        else
+        {
+            wallJumpCooldown += Time.deltaTime;
+        }
+
+
+
+
+
+
+
 
     }
 
@@ -291,7 +323,7 @@ public class Playermovement : MonoBehaviour
         {
             sprite.flipX = false;
 
-            state = MovementState.wall_jummping;
+            state = MovementState.wall_jumping;
 
         }
 
@@ -303,21 +335,15 @@ public class Playermovement : MonoBehaviour
 
 
     }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-
-        if (((collision.gameObject.CompareTag("Wall")) ))
+        if (collision.gameObject.CompareTag("Wall"))
         {
-            Wall();
-
-            state = MovementState.wall_jummping;
-
+            state = MovementState.wall_jumping;
         }
-      
     }
 
-   
+
 
     private bool isGrounded()
     {
@@ -328,12 +354,14 @@ public class Playermovement : MonoBehaviour
     {
         RaycastHit2D raycastHitRight = Physics2D.BoxCast(boxCol.bounds.center, boxCol.bounds.size, 0, new Vector2(transform.localScale.x, 0), 0.1f, wallLayer);
         RaycastHit2D raycastHitLeft = Physics2D.BoxCast(boxCol.bounds.center, boxCol.bounds.size, 0, new Vector2(transform.localScale.x, 0), -0.1f, wallLayer);
-        if(raycastHitLeft.collider != null ||  raycastHitRight.collider != null) { return true; }
+        if (raycastHitLeft.collider != null || raycastHitRight.collider != null) { return true; }
         else
         {
             return false;
         }
-        //return raycastHit.collider != null;
+
+
+
 
 
     }

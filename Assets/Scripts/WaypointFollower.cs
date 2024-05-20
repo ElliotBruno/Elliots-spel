@@ -11,6 +11,10 @@ public class WaypointFollower : MonoBehaviour
     private Transform waypointTransform;
     private int currentWaypointIndex = 0;
 
+
+ 
+   
+
     private void Update()
     {
         waypointTransform = waypoints[currentWaypointIndex].transform;

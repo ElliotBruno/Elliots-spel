@@ -20,18 +20,14 @@ public class Death : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
       
     }
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if ((collision.gameObject.CompareTag("Spikes")) || (collision.gameObject.CompareTag("Flie")) || collision.gameObject.CompareTag("Enemy"))
         {
             Die();
-
         }
 
     }
-    
     private void Die()
     {
         if (healthAmount<=0)
@@ -41,11 +37,8 @@ public class Death : MonoBehaviour
             deathSoundEffect.Play();
             rb.bodyType = RigidbodyType2D.Static;
         }
-        
-
 
     }
-
     private void RestartLive()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -53,5 +46,4 @@ public class Death : MonoBehaviour
 }
      
 
-    
-
+   

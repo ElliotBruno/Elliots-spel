@@ -20,7 +20,6 @@ public class itemcollector : MonoBehaviour
     {
             levelcompleted = false;
         anim = GetComponent<Animator>();
-        allTrophiesCollected = false;
     }
     [SerializeField] private TextMeshProUGUI Kiwitext;
     [SerializeField] private TextMeshProUGUI Trophietext;
@@ -31,41 +30,20 @@ public class itemcollector : MonoBehaviour
 
 
 
-    /* void Update()
-     {
-         if (allTrophiesCollected == false)
-         {
-             elapsedTime += Time.deltaTime; // Uppdatera körtiden varje frame
-             int minutes = Mathf.FloorToInt(elapsedTime / 60); // Beräkna minuter
-             int seconds = Mathf.FloorToInt(elapsedTime % 60); // Beräkna sekunder
-             Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdatera texten
-         }
-         if (allTrophiesCollected == true)
-         {
-             elapsedTime += Time.deltaTime; // Uppdatera körtiden varje frame
-             int minutes = Mathf.FloorToInt(elapsedTime / 60); // Beräkna minuter
-             int seconds = Mathf.FloorToInt(elapsedTime % 60); // Beräkna sekunder
-             Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdatera texten
-         }
 
-     }*/
+
+
     void Update()
     {
-        if (!allTrophiesCollected)
+        if (allTrophiesCollected == false)
         {
             elapsedTime += Time.deltaTime; // Uppdatera körtiden varje frame
             int minutes = Mathf.FloorToInt(elapsedTime / 60); // Beräkna minuter
             int seconds = Mathf.FloorToInt(elapsedTime % 60); // Beräkna sekunder
-/*            Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdatera texten
-*/        }
+            Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdatera texten
+        }
     }
-    /*  private void time()
-      {
-          elapsedTime += Time.deltaTime; // Uppdatera körtiden varje frame
-          int minutes = Mathf.FloorToInt(elapsedTime / 60); // Beräkna minuter
-          int seconds = Mathf.FloorToInt(elapsedTime % 60); // Beräkna sekunder
-          Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdatera texten
-      }*/
+  
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -90,7 +68,7 @@ public class itemcollector : MonoBehaviour
             if (Points == 0)
             {
                 allTrophiesCollected = true;
-                Debug.Log("hej");
+                Trophietext.text = "Congratulations! You Won!";
             }
           
         }
