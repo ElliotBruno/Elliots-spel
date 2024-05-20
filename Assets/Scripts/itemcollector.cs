@@ -20,7 +20,7 @@ public class itemcollector : MonoBehaviour
     {
             levelcompleted = false;
         anim = GetComponent<Animator>();
-
+        allTrophiesCollected = false;
     }
     [SerializeField] private TextMeshProUGUI Kiwitext;
     [SerializeField] private TextMeshProUGUI Trophietext;
@@ -31,6 +31,24 @@ public class itemcollector : MonoBehaviour
 
 
 
+    /* void Update()
+     {
+         if (allTrophiesCollected == false)
+         {
+             elapsedTime += Time.deltaTime; // Uppdatera körtiden varje frame
+             int minutes = Mathf.FloorToInt(elapsedTime / 60); // Beräkna minuter
+             int seconds = Mathf.FloorToInt(elapsedTime % 60); // Beräkna sekunder
+             Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdatera texten
+         }
+         if (allTrophiesCollected == true)
+         {
+             elapsedTime += Time.deltaTime; // Uppdatera körtiden varje frame
+             int minutes = Mathf.FloorToInt(elapsedTime / 60); // Beräkna minuter
+             int seconds = Mathf.FloorToInt(elapsedTime % 60); // Beräkna sekunder
+             Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdatera texten
+         }
+
+     }*/
     void Update()
     {
         if (!allTrophiesCollected)
@@ -38,16 +56,16 @@ public class itemcollector : MonoBehaviour
             elapsedTime += Time.deltaTime; // Uppdatera körtiden varje frame
             int minutes = Mathf.FloorToInt(elapsedTime / 60); // Beräkna minuter
             int seconds = Mathf.FloorToInt(elapsedTime % 60); // Beräkna sekunder
-            Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdatera texten
-        }
+/*            Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdatera texten
+*/        }
     }
-  /*  private void time()
-    {
-        elapsedTime += Time.deltaTime; // Uppdatera körtiden varje frame
-        int minutes = Mathf.FloorToInt(elapsedTime / 60); // Beräkna minuter
-        int seconds = Mathf.FloorToInt(elapsedTime % 60); // Beräkna sekunder
-        Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdatera texten
-    }*/
+    /*  private void time()
+      {
+          elapsedTime += Time.deltaTime; // Uppdatera körtiden varje frame
+          int minutes = Mathf.FloorToInt(elapsedTime / 60); // Beräkna minuter
+          int seconds = Mathf.FloorToInt(elapsedTime % 60); // Beräkna sekunder
+          Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdatera texten
+      }*/
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -69,14 +87,12 @@ public class itemcollector : MonoBehaviour
 
             finishSoundEffect.Play();
 
-            if (Points <= 0)
+            if (Points == 0)
             {
                 allTrophiesCollected = true;
+                Debug.Log("hej");
             }
-            /*            anim.SetTrigger("finish");
-            */
-            /*levelcompleted = true;
-            Invoke("Completlevel", 2f);*/
+          
         }
         else if (collision.CompareTag("Fake"))
         {
@@ -91,11 +107,7 @@ public class itemcollector : MonoBehaviour
         {
             
         }
-       /* void Completlevel()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        }
-*/
+      
     }
     [Header("Audio")]
     [SerializeField] private AudioSource finishSoundEffect;

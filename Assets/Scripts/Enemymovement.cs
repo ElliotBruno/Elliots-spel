@@ -101,7 +101,6 @@ public class Enemymovement : MonoBehaviour
 
         IEnumerator WaitForSecondsInVoid()
         {
-            Debug.Log("Start waiting");
 
             while (timer < waitTime)
             {
@@ -109,7 +108,6 @@ public class Enemymovement : MonoBehaviour
                 yield return null;
             }
 
-            Debug.Log("Finished waiting");
 
             // Här kan du utföra din åtgärd efter att ha väntat i 3 sekunder
         }

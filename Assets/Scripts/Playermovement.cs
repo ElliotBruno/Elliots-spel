@@ -70,7 +70,6 @@ public class Playermovement : MonoBehaviour
         }
         else if (Wall() && !isGrounded())
         {
-            Debug.Log("Hej");
             if (horizontal == 0)
             {
                 rb.velocity = new Vector2(-Mathf.Sign(transform.localScale.x) * 10, 0);
@@ -164,7 +163,7 @@ public class Playermovement : MonoBehaviour
 
     void ContinueExecution()
     {
-        Debug.Log("Waited for 2 seconds. Continue execution.");
+
     }
     // Update is called once per frame
 
