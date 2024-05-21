@@ -29,12 +29,12 @@ public class Finishedlevel : MonoBehaviour
     public int points = 8;
 
     [SerializeField] private TextMeshProUGUI Kiwitext;
-  
 
 
 
 
-void Start()
+
+    void Start()
     {
         finishSound = GetComponent<AudioSource>();
         anim = GetComponent<Animator>();
@@ -61,7 +61,7 @@ void Start()
     private void OnCollisionEnter2D(Collision2D collision)
     {
 
-        if (((collision.gameObject.CompareTag("Finish")) ))
+        if (((collision.gameObject.CompareTag("Finish"))))
         {
             anim.SetTrigger("finished");
             finishSound.Play();
@@ -95,8 +95,8 @@ void Start()
         animator.SetBool("IsDead", true);
         Debug.Log("Died");
         GetComponent<Collider2D>().enabled = false;
-/*        this.enabled = false;
-*/        
+        this.enabled = false;
+
         enemyCount -= 1;
         Enemytext.text = "Enemeis remaining: " + enemyCount;
 

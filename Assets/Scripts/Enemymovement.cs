@@ -109,7 +109,6 @@ public class Enemymovement : MonoBehaviour
             }
 
 
-            // Här kan du utföra din åtgärd efter att ha väntat i 3 sekunder
         }
 
 

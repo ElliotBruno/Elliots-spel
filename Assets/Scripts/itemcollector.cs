@@ -37,10 +37,10 @@ public class itemcollector : MonoBehaviour
     {
         if (allTrophiesCollected == false)
         {
-            elapsedTime += Time.deltaTime; // Uppdatera körtiden varje frame
-            int minutes = Mathf.FloorToInt(elapsedTime / 60); // Beräkna minuter
-            int seconds = Mathf.FloorToInt(elapsedTime % 60); // Beräkna sekunder
-            Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdatera texten
+            elapsedTime += Time.deltaTime; // Uppdate each frame
+            int minutes = Mathf.FloorToInt(elapsedTime / 60); // Minutes
+            int seconds = Mathf.FloorToInt(elapsedTime % 60); // Seconds
+            Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdate Text
         }
     }
   

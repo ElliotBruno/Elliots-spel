@@ -1,20 +1,18 @@
-using TMPro;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class RuntimeDisplay : MonoBehaviour
+public class Time : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI Timetext;
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
 
-/*    public Text runtimeText; // Referens till Text-komponenten
- *    
-*/    private float elapsedTime = 0f; // Variabel för att hålla körtiden
-
+    // Update is called once per frame
     void Update()
     {
-        elapsedTime += Time.deltaTime; // Uppdatera körtiden varje frame
-        int minutes = Mathf.FloorToInt(elapsedTime / 60); // Beräkna minuter
-        int seconds = Mathf.FloorToInt(elapsedTime % 60); // Beräkna sekunder
-        Timetext.text = string.Format("{0:00}:{1:00}", minutes, seconds); // Uppdatera texten
+        
     }
 }
